@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const {
-  listarRols,
+  listarRoles,
   consultarRol,
   crearRol,
   editarRol,
@@ -8,7 +8,7 @@ const {
 } = require("../controllers/Rol.controller");
 const routes = Router();
 
-routes.get("/listar", listarRols);
+routes.get("/listar", listarRoles);
 routes.get("/consultar/:idRol", consultarRol);
 routes.post("/crear", crearRol);
 routes.post("/editar", editarRol);
