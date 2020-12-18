@@ -17,13 +17,12 @@ function executeQuery(query, res) {
   });
 }
 
-function callProcedure(procedure, res) {
+function callProcedure(procedure, res,next) {
   if (!connection._connectCalled) {
     connection.connect();
   }
   connection.query(`CALL ${procedure}`, (err, rows, fields) => {
-    if (err) throw err;
-    connection.end();
+    if (err) next(err);
     res.send(rows);
   });
 }
