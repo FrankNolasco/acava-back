@@ -1,11 +1,11 @@
 const { callProcedure } = require("../functions/SqlScripts");
 
 const listarRoles = (req, res, next) => {
-  callProcedure(`listarRoles()`, res);
+  callProcedure(`listarRoles()`, res,next);
 };
 const consultarRol = (req, res, next) => {
   const { idRol } = req.params;
-  callProcedure(`consultarRol(${idRol})`, res);
+  callProcedure(`consultarRol(${idRol})`, res,next);
 };
 const crearRol = (req, res, next) => {
   const {
@@ -14,7 +14,7 @@ const crearRol = (req, res, next) => {
   } = req.body;
   callProcedure(
     `crearRol( '${Nombre}' , '${id_usuario_registro}')`,
-    res
+    res,next
   );
 };
 const editarRol = (req, res, next) => {
@@ -24,13 +24,13 @@ const editarRol = (req, res, next) => {
   } = req.body;
   callProcedure(
     `editarRol(${idRol},'${nombre}')`,
-    res
+    res,next
   );
 };
 
 const eliminarRol = (req, res, next) => {
   const { idRol } = req.body;
-  callProcedure(`eliminarRol(${idRol})`, res);
+  callProcedure(`eliminarRol(${idRol})`, res,next);
 };
 
 module.exports = {

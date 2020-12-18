@@ -1,11 +1,11 @@
 const { callProcedure } = require("../functions/SqlScripts");
 
 const listarEstados = (req, res, next) => {
-  callProcedure(`listarEstados()`, res);
+  callProcedure(`listarEstados()`, res,next);
 };
 const consultarEstado = (req, res, next) => {
   const { idEstado } = req.params;
-  callProcedure(`consultarEstado(${idEstado})`, res);
+  callProcedure(`consultarEstado(${idEstado})`, res,next);
 };
 const crearEstado = (req, res, next) => {
   const {
@@ -13,7 +13,7 @@ const crearEstado = (req, res, next) => {
   } = req.body;
   callProcedure(
     `crearEstado( '${Nombre}' )`,
-    res
+    res,next
   );
 };
 const editarEstado = (req, res, next) => {
@@ -23,7 +23,7 @@ const editarEstado = (req, res, next) => {
   } = req.body;
   callProcedure(
     `editarEstado(${idEstado},'${nombre}')`,
-    res
+    res,next
   );
 };
 

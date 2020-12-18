@@ -1,11 +1,11 @@
 const { callProcedure } = require("../functions/SqlScripts");
 
 const listarTipoCargos = (req, res, next) => {
-  callProcedure(`listarTiposCargos()`, res);
+  callProcedure(`listarTiposCargo()`, res,next);
 };
 const consultarTipoCargo = (req, res, next) => {
   const { idTipoCargo } = req.params;
-  callProcedure(`consultarTipoCargo(${idTipoCargo})`, res);
+  callProcedure(`consultarTipoCargo(${idTipoCargo})`, res,next);
 };
 const crearTipoCargo = (req, res, next) => {
   const {
@@ -14,7 +14,7 @@ const crearTipoCargo = (req, res, next) => {
   } = req.body;
   callProcedure(
     `crearTipoCargo( '${Nombre}' , '${id_usuario_registro}')`,
-    res
+    res,next
   );
 };
 const editarTipoCargo = (req, res, next) => {
@@ -24,13 +24,13 @@ const editarTipoCargo = (req, res, next) => {
   } = req.body;
   callProcedure(
     `editarTipoCargo(${idTipoCargo} , '${Nombre}')`,
-    res
+    res,next
   );
 };
 
 const eliminarTipoCargo = (req, res, next) => {
   const { idTipoCargo } = req.body;
-  callProcedure(`eliminarTipoCargo(${idTipoCargo})`, res);
+  callProcedure(`eliminarTipoCargo(${idTipoCargo})`, res,next);
 };
 
 module.exports = {

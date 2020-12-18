@@ -1,11 +1,11 @@
 const { callProcedure } = require("../functions/SqlScripts");
 
 const listarPersonas = (req, res, next) => {
-  callProcedure(`listarPersonas()`, res);
+  callProcedure(`listarPersonas()`, res,next);
 };
 const consultarPersona = (req, res, next) => {
   const { idPersona } = req.params;
-  callProcedure(`consultarPersona(${idPersona})`, res);
+  callProcedure(`consultarPersona(${idPersona})`, res,next);
 };
 const crearPersona = (req, res, next) => {
   const {
@@ -22,7 +22,7 @@ const crearPersona = (req, res, next) => {
   } = req.body;
   callProcedure(
     `crearPersona('${apellidos}','${nombres}','${Direccion_1}','${Direccion_2}','${Documento}','${Email}','${RUC}','${Telefono_1}','${Telefono_2}','${id_usuario_registro}')`,
-    res
+    res,next
   );
 };
 const editarPersona = (req, res, next) => {
@@ -41,13 +41,13 @@ const editarPersona = (req, res, next) => {
   callProcedure(
     `editarPersona(${idPersona},'${apellidos}','${nombres}','${Direccion_1}','${Direccion_2}','${Documento}'
     ,'${Email}','${RUC}','${Telefono_1}','${Telefono_2}')`,
-    res
+    res,next
   );
 };
 
 const eliminarPersona = (req, res, next) => {
   const { idPersona } = req.body;
-  callProcedure(`eliminarPersona(${idPersona})`, res);
+  callProcedure(`eliminarPersona(${idPersona})`, res,next);
 };
 
 module.exports = {

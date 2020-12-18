@@ -1,11 +1,11 @@
 const { callProcedure } = require("../functions/SqlScripts");
 
 const listarClientes = (req, res, next) => {
-  callProcedure(`listarClientes()`, res);
+  callProcedure(`listarClientes()`, res,next);
 };
 const consultarCliente = (req, res, next) => {
   const { idCliente } = req.params;
-  callProcedure(`consultarCliente(${idCliente})`, res);
+  callProcedure(`consultarCliente(${idCliente})`, res,next);
 };
 const crearCliente = (req, res, next) => {
   const {
@@ -14,7 +14,7 @@ const crearCliente = (req, res, next) => {
   } = req.body;
   callProcedure(
     `crearCliente( '${id_persona}' , '${id_usuario_registro}')`,
-    res
+    res,next
   );
 };
 const editarCliente = (req, res, next) => {
@@ -24,13 +24,13 @@ const editarCliente = (req, res, next) => {
   } = req.body;
   callProcedure(
     `editarCliente(${idCliente},'${id_persona}')`,
-    res
+    res,next
   );
 };
 
 const eliminarCliente = (req, res, next) => {
   const { idCliente } = req.body;
-  callProcedure(`eliminarCliente(${idCliente})`, res);
+  callProcedure(`eliminarCliente(${idCliente})`, res,next);
 };
 
 module.exports = {

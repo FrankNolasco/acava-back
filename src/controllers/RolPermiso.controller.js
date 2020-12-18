@@ -1,11 +1,11 @@
 const { callProcedure } = require("../functions/SqlScripts");
 
 const listarRolPermisos = (req, res, next) => {
-  callProcedure(`listarRolPermisos()`, res);
+  callProcedure(`listarRolPermisos()`, res,next);
 };
 const consultarRolPermiso = (req, res, next) => {
   const { idRolPermiso } = req.params;
-  callProcedure(`consultarRolPermiso(${idRolPermiso})`, res);
+  callProcedure(`consultarRolPermiso(${idRolPermiso})`, res,next);
 };
 const crearRolPermiso = (req, res, next) => {
   const {
@@ -15,7 +15,7 @@ const crearRolPermiso = (req, res, next) => {
   } = req.body;
   callProcedure(
     `crearRolPermiso('${idRol}','${idPermiso}','${id_usuario_registro}')`,
-    res
+    res,next
   );
 };
 const editarRolPermiso = (req, res, next) => {
@@ -26,13 +26,13 @@ const editarRolPermiso = (req, res, next) => {
   } = req.body;
   callProcedure(
     `editarRolPermiso(${idRolPermiso},'${idRol}','${idPermiso}')`,
-    res
+    res,next
   );
 };
 
 const eliminarRolPermiso = (req, res, next) => {
   const { idRolPermiso } = req.body;
-  callProcedure(`eliminarRolPermiso(${idRolPermiso})`, res);
+  callProcedure(`eliminarRolPermiso(${idRolPermiso})`, res,next);
 };
 
 module.exports = {

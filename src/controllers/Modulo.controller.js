@@ -1,11 +1,11 @@
 const { callProcedure } = require("../functions/SqlScripts");
 
 const listarModulos = (req, res, next) => {
-  callProcedure(`listarModulos()`, res);
+  callProcedure(`listarModulos()`, res,next);
 };
 const consultarModulo = (req, res, next) => {
   const { idModulo } = req.params;
-  callProcedure(`consultarModulo(${idModulo})`, res);
+  callProcedure(`consultarModulo(${idModulo})`, res,next);
 };
 const crearModulo = (req, res, next) => {
   const {
@@ -14,7 +14,7 @@ const crearModulo = (req, res, next) => {
   } = req.body;
   callProcedure(
     `crearModulo( '${Nombre}' , '${id_usuario_registro}')`,
-    res
+    res,next
   );
 };
 const editarModulo = (req, res, next) => {
@@ -24,13 +24,13 @@ const editarModulo = (req, res, next) => {
   } = req.body;
   callProcedure(
     `editarModulo(${idModulo},'${nombre}')`,
-    res
+    res,next
   );
 };
 
 const eliminarModulo = (req, res, next) => {
   const { idModulo } = req.body;
-  callProcedure(`eliminarModulo(${idModulo})`, res);
+  callProcedure(`eliminarModulo(${idModulo})`, res,next);
 };
 
 module.exports = {
