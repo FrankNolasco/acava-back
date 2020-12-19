@@ -20,11 +20,14 @@ const eliminarTipoServicio = (req, res, next) => {
   const { idTipoServicio } = req.body;
   callProcedure(`eliminarTipoServicio(${idTipoServicio})`, res,next);
 };
-
+const listarPapeleraTipoServicios = (req,res,next) => {
+  callProcedure('listarPapeleraTipoServicios()',res,next)
+}
 module.exports = {
   listarTipoServicios,
   consultarTipoServicio,
   crearTipoServicio,
   editarTipoServicio,
   eliminarTipoServicio,
+  listarPapeleraTipoServicios
 };
