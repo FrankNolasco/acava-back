@@ -61,11 +61,13 @@ const storage = multer.diskStorage({
 
 app.use(multer({storage}).single('file'))
 
-
+app.get('/cdn/ver/:name' , (req,res,next) => {
+  const { name } = req.params
+  res.sendFile(path.join(__dirname,`/public/uploads/${name}`))
+})
 
 app.post('/api/upload/images', async (req,res,next) => {
-  console.log(req.file)
-  res.send({image : req.file })
+  res.send([{imageUploaded : req.file.filename }])
 })
 
 app.listen(port, () => console.log(`Example app listening on port port!`));
