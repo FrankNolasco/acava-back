@@ -7,6 +7,10 @@ const consultarRolPermiso = (req, res, next) => {
   const { idRolPermiso } = req.params;
   callProcedure(`consultarRolPermiso(${idRolPermiso})`, res,next);
 };
+const consultarPermisosRol = (req, res, next) => {
+  const { idRol } = req.params;
+  callProcedure(`ConsultarPermisosRol(${idRol})`, res,next);
+};
 const crearRolPermiso = (req, res, next) => {
   const {
     idRol,
@@ -41,4 +45,5 @@ module.exports = {
   crearRolPermiso,
   editarRolPermiso,
   eliminarRolPermiso,
+  consultarPermisosRol,
 };

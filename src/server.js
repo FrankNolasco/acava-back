@@ -45,6 +45,7 @@ app.use("/api/rol-permiso/", require("./routes/RolPermiso.routes"));
 app.use("/api/tipo-cargo/", require("./routes/TipoCargo.routes"));
 app.use("/api/tipo-servicio/", require("./routes/TipoServicio.routes"));
 app.use("/api/trabajos/", require("./routes/Trabajos.routes"));
+app.use("/api/usuarios/", require("./routes/Usuarios.routes"));
 passport.use("local-signin", new LocalStrategy(localSignin));
 app.post(
   "/api/login",

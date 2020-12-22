@@ -1,11 +1,11 @@
 const { callProcedure } = require("../functions/SqlScripts");
 
 const listarPersonas = (req, res, next) => {
-  callProcedure(`listarPersonas()`, res,next);
+  callProcedure(`listarPersonas()`, res, next);
 };
 const consultarPersona = (req, res, next) => {
   const { idPersona } = req.params;
-  callProcedure(`consultarPersona(${idPersona})`, res,next);
+  callProcedure(`consultarPersona(${idPersona})`, res, next);
 };
 const crearPersona = (req, res, next) => {
   const {
@@ -19,10 +19,13 @@ const crearPersona = (req, res, next) => {
     RUC,
     Telefono_1,
     Telefono_2,
+    Genero,
+    Fecha_Nacimiento,
   } = req.body;
   callProcedure(
-    `crearPersona('${apellidos}','${nombres}','${Direccion_1}','${Direccion_2}','${Documento}','${Email}','${RUC}','${Telefono_1}','${Telefono_2}','${id_usuario_registro}')`,
-    res,next
+    `crearPersona('${apellidos}','${nombres}','${Direccion_1}','${Direccion_2}','${Documento}','${Email}','${RUC}','${Telefono_1}','${Telefono_2}','${id_usuario_registro}','${Genero}','${Fecha_Nacimiento}')`,
+    res,
+    next
   );
 };
 const editarPersona = (req, res, next) => {
@@ -41,13 +44,19 @@ const editarPersona = (req, res, next) => {
   callProcedure(
     `editarPersona(${idPersona},'${apellidos}','${nombres}','${Direccion_1}','${Direccion_2}','${Documento}'
     ,'${Email}','${RUC}','${Telefono_1}','${Telefono_2}')`,
-    res,next
+    res,
+    next
   );
 };
 
 const eliminarPersona = (req, res, next) => {
   const { idPersona } = req.body;
-  callProcedure(`eliminarPersona(${idPersona})`, res,next);
+  callProcedure(`eliminarPersona(${idPersona})`, res, next);
+};
+
+const consultarPersonaPorDni = (req, res, next) => {
+  const { dni } = req.params;
+  callProcedure(`ConsultarPersonaDNI('${dni}')`, res, next);
 };
 
 module.exports = {
@@ -56,4 +65,5 @@ module.exports = {
   crearPersona,
   editarPersona,
   eliminarPersona,
+  consultarPersonaPorDni,
 };
