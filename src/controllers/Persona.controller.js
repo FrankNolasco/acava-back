@@ -23,7 +23,7 @@ const crearPersona = (req, res, next) => {
     Fecha_Nacimiento,
   } = req.body;
   callProcedure(
-    `crearPersona('${apellidos}','${nombres}','${Direccion_1}','${Direccion_2}','${Documento}','${Email}','${RUC}','${Telefono_1}','${Telefono_2}','${id_usuario_registro}','${Genero}','${Fecha_Nacimiento}')`,
+    `crearPersona('${apellidos}','${nombres}','${Direccion_1}','${Direccion_2}','${Documento}','${Email}','${RUC}','${Telefono_1}','${Telefono_2}','${id_usuario_registro}','${Fecha_Nacimiento}','${Genero}')`,
     res,
     next
   );
