@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { VerificarRol } = require("../controllers/Security.controller");
 const {
   listarClientes,
   consultarCliente,
@@ -8,10 +9,10 @@ const {
 } = require("../controllers/Cliente.controller");
 const routes = Router();
 
-routes.get("/listar", listarClientes);
-routes.get("/consultar/:idCliente", consultarCliente);
-routes.post("/crear", crearCliente);
-routes.post("/editar", editarCliente);
-routes.post("/eliminar", eliminarCliente);
+routes.get("/listar", VerificarRol , listarClientes);
+routes.get("/consultar/:idCliente", VerificarRol , consultarCliente);
+routes.post("/crear", VerificarRol , crearCliente);
+routes.post("/editar", VerificarRol , editarCliente);
+routes.post("/eliminar", VerificarRol , eliminarCliente);
 
 module.exports = routes;

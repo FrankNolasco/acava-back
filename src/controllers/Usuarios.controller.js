@@ -1,5 +1,6 @@
-const { callProcedure } = require("../functions/SqlScripts");
+const { callProcedure , connection } = require("../functions/SqlScripts");
 const bcrypt = require("bcrypt-nodejs");
+const { validarRows } = require("../functions/utils");
 
 const listarUsuariosWeb = (req, res, next) => {
   callProcedure(`listarUsuariosWeb()`, res,next);
@@ -29,8 +30,37 @@ const asignarRolUsuarioWeb = (req,res,next) => {
   callProcedure(`asignarRolUsuarioWeb('${id_rol}','${id_usuario}')`,res,next)
 }
 
+const consultarMenu = (req,res,next) => {
+  const {Id_Rol} = req.body 
+  if (!connection._connectCalled) {
+    connection.connect();
+  }
+  connection.query(`CALL listarMenus('${Id_Rol}')`, (err, rows, fields) => {
+    if (err) next(err);
+    if(validarRows(rows)){
+      const menus = rows[0]
+      const aux = []
+      const aux2 = []
+      Array.isArray(menus) && menus.forEach(menu => {
+        if(!aux.includes(menu.Id_Menu)){
+          aux.push(menu.Id_Menu)
+          aux2.push({ Id_Menu : menu.Id_Menu , Menu : menu.Menu , Icon : menu.Icono })
+        }
+      })
+      const menuRespuesta = aux2.map(el => {
+        const subMenus = Array.isArray(menus) && menus.filter(menu => menu.Id_Menu === el.Id_Menu)
+        return { ...el , subMenus }
+      })
+      res.send([menuRespuesta]);
+    }else{
+      res.sendStatus(500)
+    }
+  });
+}
+
 module.exports = {
     listarUsuariosWeb,
     crearUsuarioWeb,
-    asignarRolUsuarioWeb
+    asignarRolUsuarioWeb,
+    consultarMenu
 };

@@ -33,10 +33,16 @@ const eliminarModulo = (req, res, next) => {
   callProcedure(`eliminarModulo(${idModulo})`, res,next);
 };
 
+const consultarModulosPorRol = (req, res, next) => {
+  const { idRol } = req.body;
+  callProcedure(`consultarModulosPorRol('${idRol}')`,res,next);
+}
+
 module.exports = {
   listarModulos,
   consultarModulo,
   crearModulo,
   editarModulo,
   eliminarModulo,
+  consultarModulosPorRol,
 };

@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { VerificarRol } = require("../controllers/Security.controller");
 const {
   listarEmpleados,
   consultarEmpleado,
@@ -8,10 +9,10 @@ const {
 } = require("../controllers/Empleado.controller");
 const routes = Router();
 
-routes.get("/listar", listarEmpleados);
-routes.get("/consultar/:idEmpleado", consultarEmpleado);
-routes.post("/crear", crearEmpleado);
-routes.post("/editar", editarEmpleado);
-routes.post("/eliminar", eliminarEmpleado);
+routes.get("/listar", VerificarRol , listarEmpleados);
+routes.get("/consultar/:idEmpleado", VerificarRol , consultarEmpleado);
+routes.post("/crear", VerificarRol , crearEmpleado);
+routes.post("/editar", VerificarRol , editarEmpleado);
+routes.post("/eliminar", VerificarRol , eliminarEmpleado);
 
 module.exports = routes;
