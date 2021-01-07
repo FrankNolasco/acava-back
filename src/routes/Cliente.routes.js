@@ -7,7 +7,7 @@ const {
   crearCliente,
   editarCliente,
   eliminarCliente,
-} = require(path.join(__dirname,"../controllers/Cliente.controller"));
+} = require("../controllers/Cliente.controller");
 const routes = Router();
 
 routes.get("/listar", VerificarRol , listarClientes);

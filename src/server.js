@@ -38,19 +38,19 @@ app.get('/:filename',(req,res,next) => {
 })
 
 app.use(passport.initialize());
-app.use("/api/servicio/", require(path.join(__dirname,"/routes/Servicios.routes")));
-app.use("/api/empleado/", require(path.join(__dirname,"/routes/Empleado.routes")));
-app.use("/api/cliente/", require(path.join(__dirname,"/routes/Cliente.routes")));
-app.use("/api/estado/", require(path.join(__dirname,"/routes/Estado.routes")));
-app.use("/api/modulo/", require(path.join(__dirname,"/routes/Modulo.routes")));
-app.use("/api/permiso/", require(path.join(__dirname,"/routes/Permiso.routes")));
-app.use("/api/persona/", require(path.join(__dirname,"/routes/Persona.routes")));
-app.use("/api/rol/", require(path.join(__dirname,"/routes/Rol.routes")));
-app.use("/api/rol-permiso/", require(path.join(__dirname,"/routes/RolPermiso.routes")));
-app.use("/api/tipo-cargo/", require(path.join(__dirname,"/routes/TipoCargo.routes")));
-app.use("/api/tipo-servicio/", require(path.join(__dirname,"/routes/TipoServicio.routes")));
-app.use("/api/trabajos/", require(path.join(__dirname,"/routes/Trabajos.routes")));
-app.use("/api/usuarios/", require(path.join(__dirname,"/routes/Usuarios.routes")));
+app.use("/api/servicio/", require("./routes/Servicios.routes"));
+app.use("/api/empleado/", require("./routes/Empleado.routes"));
+app.use("/api/cliente/", require("./routes/Cliente.routes"));
+app.use("/api/estado/", require("./routes/Estado.routes"));
+app.use("/api/modulo/", require("./routes/Modulo.routes"));
+app.use("/api/permiso/", require("./routes/Permiso.routes"));
+app.use("/api/persona/", require("./routes/Persona.routes"));
+app.use("/api/rol/", require("./routes/Rol.routes"));
+app.use("/api/rol-permiso/", require("./routes/RolPermiso.routes"));
+app.use("/api/tipo-cargo/", require("./routes/TipoCargo.routes"));
+app.use("/api/tipo-servicio/", require("./routes/TipoServicio.routes"));
+app.use("/api/trabajos/", require("./routes/Trabajos.routes"));
+app.use("/api/usuarios/", require("./routes/Usuarios.routes"));
 passport.use("local-signin", new LocalStrategy(localSignin));
 app.post(
   "/api/login",
