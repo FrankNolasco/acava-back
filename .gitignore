@@ -109,3 +109,7 @@ dist
 *.jpeg
 *.gif
 *.svg
+
+#Public Directory
+/src/frontend
+/src/frontend/*
