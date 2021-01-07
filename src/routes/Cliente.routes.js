@@ -1,12 +1,13 @@
 const { Router } = require("express");
-const { VerificarRol } = require("../controllers/Security.controller");
+const path = require("path")
+const { VerificarRol } = require();
 const {
   listarClientes,
   consultarCliente,
   crearCliente,
   editarCliente,
   eliminarCliente,
-} = require("../controllers/Cliente.controller");
+} = require(path.join(__dirname,"../controllers/Cliente.controller"));
 const routes = Router();
 
 routes.get("/listar", VerificarRol , listarClientes);

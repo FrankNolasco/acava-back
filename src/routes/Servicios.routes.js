@@ -1,5 +1,6 @@
 const { Router } = require("express");
-const { VerificarRol } = require("../controllers/Security.controller");
+const path = require("path")
+const { VerificarRol } = require(path.join(__dirname,"../controllers/Security.controller"));
 const {
   listarServicios,
   consultarServicio,
