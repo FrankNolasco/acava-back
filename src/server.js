@@ -37,6 +37,51 @@ app.get('/:filename',(req,res,next) => {
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${filename}`))
 })
 
+app.get('/403/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/403/${filename}`))
+})
+
+app.get('/404/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/404/${filename}`))
+})
+
+app.get('/app/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${filename}`))
+})
+
+app.get('/Catalogo/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/Catalogo/${filename}`))
+})
+
+app.get('/Contactame/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/Contactame/${filename}`))
+})
+
+app.get('/Login/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/Login/${filename}`))
+})
+
+app.get('/page-data/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${filename}`))
+})
+
+app.get('/static/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/static/${filename}`))
+})
+
+app.get('/trabajos/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/trabajos/${filename}`))
+})
+
 app.use(passport.initialize());
 app.use("/api/servicio/", require("./routes/Servicios.routes"));
 app.use("/api/empleado/", require("./routes/Empleado.routes"));
