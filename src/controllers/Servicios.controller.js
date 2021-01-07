@@ -11,6 +11,14 @@ const consultarServicio = (req, res, next) => {
 const listarPapeleraServicios = (req,res,next) => {
   callProcedure('listarPapeleraServicios()',res,next)
 }
+const restaurarServicio = (req,res,next) => {
+  const { idServicio } = req.body;
+  callProcedure(`restaurarServicio('${idServicio}')`, res, next)
+}
+const eliminarPermanentementeServicio = (req,res,next) => {
+  const { idServicio } = req.body;
+  callProcedure(`eliminarPermanentementeServicio('${idServicio}')`, res, next)
+}
 const crearServicio = async (req, res, next) => {
   const {
     Id_Tipo_Servicio,
@@ -32,20 +40,35 @@ const crearServicio = async (req, res, next) => {
     res.sendStatus(400);
   }
 };
-const editarServicio = (req, res, next) => {
+const editarServicio = async (req, res, next) => {
   const {
-    idServicio,
-    nombreServicio,
-    descripcion,
-    imagenSource,
-    idTipoServicio,
-    precioReferencial,
+    Id_Servicio,
+    Nombre_Servicio,
+    Descripcion,
+    Imagen_source,
+    image_modified,
+    imagenUploaded,
+    Id_Tipo_Servicio,
+    Precio_referencial,
   } = req.body;
-  callProcedure(
-    `editarServicio(${idServicio},'${nombreServicio}','${descripcion}','${imagenSource}','${idTipoServicio}','${precioReferencial}')`,
-    res,
-    next
-  );
+  if(image_modified){
+    const result = await subirImagenCloudinary(imagenUploaded);
+    if (result) {
+      callProcedure(
+        `editarServicio(${Id_Servicio},'${Nombre_Servicio}','${Descripcion}','${result.secure_url}','${Id_Tipo_Servicio}','${Precio_referencial}')`,
+        res,
+        next
+      );
+    } else {
+      res.sendStatus(400);
+    }
+  }else{
+    callProcedure(
+      `editarServicio(${Id_Servicio},'${Nombre_Servicio}','${Descripcion}','${Imagen_source}','${Id_Tipo_Servicio}','${Precio_referencial}')`,
+      res,
+      next
+    );
+  }
 };
 
 const eliminarServicio = (req, res, next) => {
@@ -59,5 +82,7 @@ module.exports = {
   crearServicio,
   editarServicio,
   eliminarServicio,
-  listarPapeleraServicios
+  listarPapeleraServicios,
+  restaurarServicio,
+  eliminarPermanentementeServicio
 };

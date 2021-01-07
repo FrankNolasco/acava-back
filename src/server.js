@@ -32,6 +32,11 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(__dirname.join(`/frontend/Gatsby/Acavados/${filename}`))
+})
+
 app.use(passport.initialize());
 app.use("/api/servicio/", require("./routes/Servicios.routes"));
 app.use("/api/empleado/", require("./routes/Empleado.routes"));
