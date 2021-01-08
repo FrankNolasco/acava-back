@@ -41,6 +41,25 @@ app.get('/:filename',(req,res,next) => {
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${filename}`))
 })
 
+app.get('/static/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/static/${filename}`))
+})
+
+app.get('/page-data/:filename',(req,res,next) => {
+  const {filename} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${filename}`))
+})
+
+app.get('/page-data/:directory/:filename',(req,res,next) => {
+  const { filename , directory } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${directory}/${filename}`))
+})
+
+app.get('/Login',(req,res,next) =>{
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/Login/index.html`))
+})
+
 app.use(passport.initialize());
 // app.use("/api/servicio/", require("./routes/Servicios.routes"));
 // app.use("/api/empleado/", require("./routes/Empleado.routes"));
