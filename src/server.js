@@ -32,70 +32,29 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/',(req,res,next) => {
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/index.html`))
+})
+
 app.get('/:filename',(req,res,next) => {
   const {filename} = req.params
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${filename}`))
 })
 
-app.get('/403/:filename',(req,res,next) => {
-  const {filename} = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/403/${filename}`))
-})
-
-app.get('/404/:filename',(req,res,next) => {
-  const {filename} = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/404/${filename}`))
-})
-
-app.get('/app/:filename',(req,res,next) => {
-  const {filename} = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${filename}`))
-})
-
-app.get('/Catalogo/:filename',(req,res,next) => {
-  const {filename} = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/Catalogo/${filename}`))
-})
-
-app.get('/Contactame/:filename',(req,res,next) => {
-  const {filename} = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/Contactame/${filename}`))
-})
-
-app.get('/Login/:filename',(req,res,next) => {
-  const {filename} = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/Login/${filename}`))
-})
-
-app.get('/page-data/:filename',(req,res,next) => {
-  const {filename} = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${filename}`))
-})
-
-app.get('/static/:filename',(req,res,next) => {
-  const {filename} = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/static/${filename}`))
-})
-
-app.get('/trabajos/:filename',(req,res,next) => {
-  const {filename} = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/trabajos/${filename}`))
-})
-
 app.use(passport.initialize());
-app.use("/api/servicio/", require("./routes/Servicios.routes"));
-app.use("/api/empleado/", require("./routes/Empleado.routes"));
-app.use("/api/cliente/", require("./routes/Cliente.routes"));
-app.use("/api/estado/", require("./routes/Estado.routes"));
-app.use("/api/modulo/", require("./routes/Modulo.routes"));
-app.use("/api/permiso/", require("./routes/Permiso.routes"));
-app.use("/api/persona/", require("./routes/Persona.routes"));
-app.use("/api/rol/", require("./routes/Rol.routes"));
-app.use("/api/rol-permiso/", require("./routes/RolPermiso.routes"));
-app.use("/api/tipo-cargo/", require("./routes/TipoCargo.routes"));
-app.use("/api/tipo-servicio/", require("./routes/TipoServicio.routes"));
-app.use("/api/trabajos/", require("./routes/Trabajos.routes"));
-app.use("/api/usuarios/", require("./routes/Usuarios.routes"));
+// app.use("/api/servicio/", require("./routes/Servicios.routes"));
+// app.use("/api/empleado/", require("./routes/Empleado.routes"));
+// app.use("/api/cliente/", require("./routes/Cliente.routes"));
+// app.use("/api/estado/", require("./routes/Estado.routes"));
+// app.use("/api/modulo/", require("./routes/Modulo.routes"));
+// app.use("/api/permiso/", require("./routes/Permiso.routes"));
+// app.use("/api/persona/", require("./routes/Persona.routes"));
+// app.use("/api/rol/", require("./routes/Rol.routes"));
+// app.use("/api/rol-permiso/", require("./routes/RolPermiso.routes"));
+// app.use("/api/tipo-cargo/", require("./routes/TipoCargo.routes"));
+// app.use("/api/tipo-servicio/", require("./routes/TipoServicio.routes"));
+// app.use("/api/trabajos/", require("./routes/Trabajos.routes"));
+// app.use("/api/usuarios/", require("./routes/Usuarios.routes"));
 passport.use("local-signin", new LocalStrategy(localSignin));
 app.post(
   "/api/login",
