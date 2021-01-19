@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const { VerificarRol } = require("../controllers/Security.controller");
+const { VerificarRol } = require("../controllers/SecurityController");
 const {
   listarTipoCargos,
   consultarTipoCargo,
   crearTipoCargo,
   editarTipoCargo,
   eliminarTipoCargo,
-} = require("../controllers/TipoCargo.controller");
+} = require("../controllers/TipoCargoController");
 const routes = Router();
 
 routes.get("/listar", VerificarRol , listarTipoCargos);

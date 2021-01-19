@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { VerificarRol } = require("../controllers/Security.controller");
+const { VerificarRol } = require("../controllers/SecurityController");
 const {
   listarRoles,
   consultarRol,
@@ -9,7 +9,7 @@ const {
   consultarModuloPorRol,
   eliminarRolModulo,
   crearRolModulo
-} = require("../controllers/Rol.controller");
+} = require("../controllers/RolController");
 const routes = Router();
 
 routes.get("/listar", VerificarRol , listarRoles);

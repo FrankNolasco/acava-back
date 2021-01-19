@@ -5,8 +5,8 @@ const {
   crearCliente,
   editarCliente,
   eliminarCliente,
-} = require("../controllers/Cliente.controller");
-const { VerificarRol } = require("../controllers/Security.controller");
+} = require("../controllers/ClienteController");
+const { VerificarRol } = require("../controllers/SecurityController");
 const routes = Router();
 
 routes.get("/listar", VerificarRol , listarClientes);

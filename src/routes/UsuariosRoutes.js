@@ -1,7 +1,7 @@
 const { Router } = require("express");
-const { VerificarRol,verificarModulo } = require("../controllers/Security.controller");
+const { VerificarRol,verificarModulo } = require("../controllers/SecurityController");
 const routes = Router();
-const { listarUsuariosWeb, crearUsuarioWeb , asignarRolUsuarioWeb, consultarMenu } = require("../controllers/Usuarios.controller");
+const { listarUsuariosWeb, crearUsuarioWeb , asignarRolUsuarioWeb, consultarMenu } = require("../controllers/UsuariosController");
 routes.get("/listar", VerificarRol ,listarUsuariosWeb);
 routes.post("/crear", VerificarRol ,crearUsuarioWeb);
 routes.post("/rol/asignar", VerificarRol ,asignarRolUsuarioWeb)

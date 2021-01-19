@@ -6,8 +6,8 @@ const multer  = require("multer")
 const path = require('path')
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const { localSignin } = require("./controllers/local.strategy.controller");
-const { login } = require("./controllers/user.controller");
+const { localSignin } = require("./controllers/localStrategyController");
+const { login } = require("./controllers/userController");
 const app = express();
 const port = 5000;
 app.use(cors());
@@ -77,19 +77,19 @@ app.get('/Login',(req,res,next) =>{
 })
 
 app.use(passport.initialize());
-app.use("/api/servicio/", require("./routes/Servicios.routes"));
-app.use("/api/empleado/", require("./routes/Empleado.routes"));
-app.use("/api/cliente/", require("./routes/Cliente.routes"));
-app.use("/api/estado/", require("./routes/Estado.routes"));
-app.use("/api/modulo/", require("./routes/Modulo.routes"));
-app.use("/api/permiso/", require("./routes/Permiso.routes"));
-app.use("/api/persona/", require("./routes/Persona.routes"));
-app.use("/api/rol/", require("./routes/Rol.routes"));
-app.use("/api/rol-permiso/", require("./routes/RolPermiso.routes"));
-app.use("/api/tipo-cargo/", require("./routes/TipoCargo.routes"));
-app.use("/api/tipo-servicio/", require("./routes/TipoServicio.routes"));
-app.use("/api/trabajos/", require("./routes/Trabajos.routes"));
-app.use("/api/usuarios/", require("./routes/Usuarios.routes"));
+app.use("/api/servicio/", require("./routes/ServiciosRoutes"));
+app.use("/api/empleado/", require("./routes/EmpleadoRoutes"));
+app.use("/api/cliente/", require("./routes/ClienteRoutes"));
+app.use("/api/estado/", require("./routes/EstadoRoutes"));
+app.use("/api/modulo/", require("./routes/ModuloRoutes"));
+app.use("/api/permiso/", require("./routes/PermisoRoutes"));
+app.use("/api/persona/", require("./routes/PersonaRoutes"));
+app.use("/api/rol/", require("./routes/RolRoutes"));
+app.use("/api/rol-permiso/", require("./routes/RolPermisoRoutes"));
+app.use("/api/tipo-cargo/", require("./routes/TipoCargoRoutes"));
+app.use("/api/tipo-servicio/", require("./routes/TipoServicioRoutes"));
+app.use("/api/trabajos/", require("./routes/TrabajosRoutes"));
+app.use("/api/usuarios/", require("./routes/UsuariosRoutes"));
 passport.use("local-signin", new LocalStrategy(localSignin));
 app.post(
   "/api/login",
