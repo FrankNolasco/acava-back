@@ -41,6 +41,22 @@ app.get('/:filename',(req,res,next) => {
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${filename}`))
 })
 
+app.get('/:directory/:filename',(req,res,next) => {
+  const { directory , filename } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${directory}/${filename}`))
+})
+
+
+app.get('/app/:directory/:filename',(req,res,next) => {
+  const { directory , filename } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${filename}`))
+})
+
+app.get('/app/:directory/:directory2/:filename',(req,res,next) => {
+  const { directory , directory2 , filename } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${directory2}/${filename}`))
+})
+
 app.get('/static/:filename',(req,res,next) => {
   const {filename} = req.params
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/static/${filename}`))
@@ -61,19 +77,19 @@ app.get('/Login',(req,res,next) =>{
 })
 
 app.use(passport.initialize());
-// app.use("/api/servicio/", require("./routes/Servicios.routes"));
-// app.use("/api/empleado/", require("./routes/Empleado.routes"));
-// app.use("/api/cliente/", require("./routes/Cliente.routes"));
-// app.use("/api/estado/", require("./routes/Estado.routes"));
-// app.use("/api/modulo/", require("./routes/Modulo.routes"));
-// app.use("/api/permiso/", require("./routes/Permiso.routes"));
-// app.use("/api/persona/", require("./routes/Persona.routes"));
-// app.use("/api/rol/", require("./routes/Rol.routes"));
-// app.use("/api/rol-permiso/", require("./routes/RolPermiso.routes"));
-// app.use("/api/tipo-cargo/", require("./routes/TipoCargo.routes"));
-// app.use("/api/tipo-servicio/", require("./routes/TipoServicio.routes"));
-// app.use("/api/trabajos/", require("./routes/Trabajos.routes"));
-// app.use("/api/usuarios/", require("./routes/Usuarios.routes"));
+app.use("/api/servicio/", require("./routes/Servicios.routes"));
+app.use("/api/empleado/", require("./routes/Empleado.routes"));
+app.use("/api/cliente/", require("./routes/Cliente.routes"));
+app.use("/api/estado/", require("./routes/Estado.routes"));
+app.use("/api/modulo/", require("./routes/Modulo.routes"));
+app.use("/api/permiso/", require("./routes/Permiso.routes"));
+app.use("/api/persona/", require("./routes/Persona.routes"));
+app.use("/api/rol/", require("./routes/Rol.routes"));
+app.use("/api/rol-permiso/", require("./routes/RolPermiso.routes"));
+app.use("/api/tipo-cargo/", require("./routes/TipoCargo.routes"));
+app.use("/api/tipo-servicio/", require("./routes/TipoServicio.routes"));
+app.use("/api/trabajos/", require("./routes/Trabajos.routes"));
+app.use("/api/usuarios/", require("./routes/Usuarios.routes"));
 passport.use("local-signin", new LocalStrategy(localSignin));
 app.post(
   "/api/login",
