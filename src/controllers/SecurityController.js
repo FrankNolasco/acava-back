@@ -19,34 +19,34 @@ const VerificarRol = ( req, res, next ) => {
                 }
                 connection.query(`CALL consultarClaveSuperSecretaRol('${bearerRol}')`, (err, rows, fields) => {
                     if (err){
-                        res.sendStatus(500);
+                       return res.sendStatus(500);
                     }
 
                     if(validarRows(rows)){
                         const supersecret = rows[0][0].ClaveSupersecreta
                         jwt.verify(token, supersecret , function (err) {
                             if (err) {
-                                res.sendStatus(500);
+                                return res.sendStatus(500);
                             }else{
-                                next();
+                                return next();
                             }
                         });
                     }else{
-                        res.sendStatus(500)
+                        return res.sendStatus(500)
                     }
                 });
             }else{
-                res.sendStatus(500)
+                return res.sendStatus(500)
             }
         }
         else{
-            res.sendStatus(500)
+            return res.sendStatus(500)
         }
     } catch (error) {
-        res.sendStatus(500)
+        return res.sendStatus(500)
     }
   } else {
-    res.sendStatus(403);
+    return res.sendStatus(403);
   }
 }
 
@@ -63,28 +63,28 @@ const verificarModulo = (req, res, next) => {
                 }
                 connection.query(`CALL consultarModuloPorRol('${idModulo}','${idRol}')`, (err, rows, fields) => {
                     if (err){
-                        res.sendStatus(500);
+                        return res.sendStatus(500);
                     }
                     else{
                         if(validarRows(rows)){
-                            res.send([{
+                            return res.send([{
                                 response : 200,
                                 authorization : true,
                             }])
                         }else{
-                            res.sendStatus(500)
+                            return res.sendStatus(500)
                         }
                     }
                 });
             }else{
-                res.sendStatus(500)
+                return res.sendStatus(500)
             }
         }else{
-            res.sendStatus(500)
+            return res.sendStatus(500)
         }
     }
     else{
-        res.sendStatus(500)
+        return res.sendStatus(500)
     }
 }
 
