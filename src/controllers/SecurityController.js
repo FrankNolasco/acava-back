@@ -26,7 +26,7 @@ const VerificarRol = ( req, res, next ) => {
                         const supersecret = rows[0][0].ClaveSupersecreta
                         jwt.verify(token, supersecret , function (err) {
                             if (err) {
-                                return res.sendStatus(500);
+                                res.sendStatus(500);
                             }else{
                                 next();
                             }
