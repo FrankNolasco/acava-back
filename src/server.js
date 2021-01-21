@@ -46,6 +46,11 @@ app.get('/:directory/:filename',(req,res,next) => {
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${directory}/${filename}`))
 })
 
+app.head('/app/:filename',(req,res,next) => {
+  const { filename } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${filename}`))
+})
+
 app.get('/app/:filename',(req,res,next) => {
   const { filename } = req.params
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${filename}`))
