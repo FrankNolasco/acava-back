@@ -46,9 +46,12 @@ app.get('/:directory/:filename',(req,res,next) => {
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${directory}/${filename}`))
 })
 
-app.head('/app/:directory/:filename',(req,res,next) => {
-  const { directory , filename } = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${filename}`))
+app.head("/app/Perfil",(req,res,next) => {
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/Perfil/index.html`))
+})
+
+app.get('/page-data/app/Perfil/page-data.json' , (req,res,next) => {
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/app/Perfil/page-data.json`))
 })
 
 app.get('/app/:directory/:filename',(req,res,next) => {
