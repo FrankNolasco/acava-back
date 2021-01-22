@@ -24,8 +24,11 @@ const VerificarRol = ( req, res, next ) => {
 
                     if(validarRows(rows)){
                         const supersecret = rows[0][0].ClaveSupersecreta
+                        console.log(token)
+                        console.log(supersecret)
                         jwt.verify(token, supersecret , function (err) {
                             if (err) {
+                                console.log(err)
                                 return next(err);
                             }else{
                                 return next();
@@ -43,7 +46,7 @@ const VerificarRol = ( req, res, next ) => {
             return res.sendStatus(500)
         }
     } catch (error) {
-        return res.sendStatus(500)
+        return next(error)
     }
   } else {
     return res.sendStatus(403);
@@ -67,10 +70,7 @@ const verificarModulo = (req, res, next) => {
                     }
                     else{
                         if(validarRows(rows)){
-                            return res.send([{
-                                response : 200,
-                                authorization : true,
-                            }])
+                            return res.send([ { response : 200, authorization : true, } ])
                         }else{
                             return res.sendStatus(500)
                         }
