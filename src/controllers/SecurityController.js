@@ -67,21 +67,21 @@ const verificarModulo = (req, res, next) => {
                     }
                     else{
                         if(validarRows(rows)){
-                            return res.send([ { response : 200, authorization : true, } ])
+                            return next()
                         }else{
-                            return res.sendStatus(500)
+                            return next(new Error())
                         }
                     }
                 });
             }else{
-                return res.sendStatus(500)
+                return next(new Error())
             }
         }else{
-            return res.sendStatus(500)
+            return next(new Error())
         }
     }
     else{
-        return res.sendStatus(500)
+        return next(new Error())
     }
 }
 
