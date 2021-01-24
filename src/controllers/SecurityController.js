@@ -28,26 +28,25 @@ const VerificarRol = ( req, res, next ) => {
                             if (err) {
                                 return next(err);
                             }else{
-				console.log("XD");
                                 return next();
                             }
                         });
                     }else{
-                        return res.sendStatus(500)
+                        return next(new Error())
                     }
                 });
             }else{
-                return res.sendStatus(500)
+                return next(new Error())
             }
         }
         else{
-            return res.sendStatus(500)
+            return next(new Error())
         }
     } catch (error) {
         return next(error)
     }
   } else {
-    return res.sendStatus(403);
+    return next(new Error())
   }
 }
 
