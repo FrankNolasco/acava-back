@@ -24,11 +24,9 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-type,Accept",
-    "application/json",
-    "text/json"
+    "*"
   );
-  res.header("Access-Control-Allow-Methods", "GET", "POST");
+  res.header("Access-Control-Allow-Methods", "GET", "POST","HEAD");
   next();
 });
 

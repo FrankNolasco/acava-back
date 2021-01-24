@@ -24,13 +24,11 @@ const VerificarRol = ( req, res, next ) => {
 
                     if(validarRows(rows)){
                         const supersecret = rows[0][0].ClaveSupersecreta
-                        console.log(token)
-                        console.log(supersecret)
                         jwt.verify(token, supersecret , function (err) {
                             if (err) {
-                                console.log(err)
                                 return next(err);
                             }else{
+				console.log("XD");
                                 return next();
                             }
                         });
