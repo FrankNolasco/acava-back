@@ -1,84 +1,39 @@
-const { connection } = require("../functions/SqlScripts");
+const { connection, callProcedureCallback } = require("../functions/SqlScripts");
 const jwt = require("jsonwebtoken");
-const { validarRows } = require("../functions/utils");
+const { validarRows , encontrarCabeceras } = require("../functions/utils");
 
 const VerificarRol = ( req, res, next ) => {
-    const bearerHeader = req.headers["authorization"];
-  if (typeof bearerHeader !== "undefined") {
-    try {
-        const bearer = bearerHeader.split(" ");
-
-        if(Array.isArray(bearer) && bearer.length >= 3){
-            const token = bearer[1];
-            
-            const bearerRol = bearer[2];
-
-            if (parseInt(bearerRol) > 0) {
-                if (!connection._connectCalled) {
-                    connection.connect();
-                }
-                connection.query(`CALL consultarClaveSuperSecretaRol('${bearerRol}')`, (err, rows, fields) => {
-                    if (err){
-                       return next(err);
-                    }
-
-                    if(validarRows(rows)){
-                        const supersecret = rows[0][0].ClaveSupersecreta
-                        jwt.verify(token, supersecret , function (err) {
-                            if (err) {
-                                return next(err);
-                            }else{
-                                return next();
-                            }
-                        });
+    const headers = encontrarCabeceras(req)
+    if(headers){
+        callProcedureCallback(`consultarClaveSuperSecretaRol('${headers.rol}')`,(rows) => {
+            if(validarRows(rows)){
+                const supersecret = rows[0][0].ClaveSupersecreta
+                jwt.verify(headers.token, supersecret , function (err) {
+                    if (err) {
+                        return next(err);
                     }else{
-                        return next(new Error())
+                        return next();
                     }
                 });
             }else{
                 return next(new Error())
             }
-        }
-        else{
-            return next(new Error())
-        }
-    } catch (error) {
-        return next(error)
+        })
+    }else{
+        return next(new Error())
     }
-  } else {
-    return next(new Error())
-  }
 }
 
 const verificarModulo = (req, res, next) => {
+    const headers = encontrarCabeceras(req);
     const { idModulo } = req.body
-    const headers = req.headers["authorization"];
-    if (typeof headers !== "undefined") {
-        const ArrayHeader = headers.split(" ");
-        if(Array.isArray(ArrayHeader) && ArrayHeader.length >= 3){
-            const idRol = ArrayHeader[2];
-            if(idRol){
-                if (!connection._connectCalled) {
-                    connection.connect();
-                }
-                connection.query(`CALL consultarModuloPorRol('${idModulo}','${idRol}')`, (err, rows, fields) => {
-                    if (err){
-                        return next(err);
-                    }
-                    else{
-                        if(validarRows(rows)){
-                            return next()
-                        }else{
-                            return next(new Error())
-                        }
-                    }
-                });
-            }else{
+    if (headers) {
+        callProcedureCallback(`consultarModuloPorRol('${idModulo}','${headers.rol}')` , (rows) => {
+            if(validarRows(rows)) return next()
+            else{
                 return next(new Error())
             }
-        }else{
-            return next(new Error())
-        }
+        })
     }
     else{
         return next(new Error())

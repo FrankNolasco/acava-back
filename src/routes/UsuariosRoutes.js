@@ -5,7 +5,9 @@ const { listarUsuariosWeb, crearUsuarioWeb , asignarRolUsuarioWeb, consultarMenu
 routes.get("/listar", VerificarRol ,listarUsuariosWeb);
 routes.post("/crear", VerificarRol ,crearUsuarioWeb);
 routes.post("/rol/asignar", VerificarRol ,asignarRolUsuarioWeb)
-routes.post("/menus/consultar", VerificarRol ,consultarMenu)
-routes.post("/verificar/modulo", VerificarRol ,verificarModulo)
+routes.post("/menus/consultar", VerificarRol ,consultarMenu);
+routes.post("/verificar/modulo", VerificarRol ,verificarModulo , (req, res) => {
+    res.send([ { response : 200, authorization : true, } ])
+})
 
 module.exports = routes;

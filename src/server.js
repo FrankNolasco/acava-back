@@ -82,6 +82,9 @@ app.get('/Login',(req,res,next) =>{
 })
 
 app.use(passport.initialize());
+
+
+
 app.use("/api/servicio/", require("./routes/ServiciosRoutes"));
 app.use("/api/empleado/", require("./routes/EmpleadoRoutes"));
 app.use("/api/cliente/", require("./routes/ClienteRoutes"));
@@ -115,7 +118,6 @@ app.get('/cdn/ver/:name' , (req,res,next) => {
   const { name } = req.params
   res.sendFile(path.join(__dirname,`/public/uploads/${name}`))
 })
-
 app.post('/api/upload/images', async (req,res,next) => {
   res.send([{imageUploaded : req.file.filename }])
 })

@@ -16,6 +16,32 @@ const validarRows = (rows) => {
     }
 }
 
+const encontrarCabeceras = (req) => {
+    const bearerHeader = req.headers["authorization"];
+    if(typeof bearerHeader !== "undefined"){
+        try {
+            const bearer = bearerHeader.split(" ");
+            if(Array.isArray(bearer) && bearer.length >= 3){
+                const token = bearer[1]
+                const rol = bearer[2]
+                if(parseInt(rol) > 0){
+                    return { token , rol }
+                }
+                else{ 
+                    return false
+                }
+
+            }else {
+                return false
+            }
+        } catch (err) {
+            return false
+        }
+    }else{
+        return false
+    }
+}
+
 module.exports = {
-    validarRows
+    validarRows , encontrarCabeceras
 }
