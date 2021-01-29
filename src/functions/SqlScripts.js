@@ -24,7 +24,7 @@ function callProcedureCallback(procedure, cb ) {
   }
   connection.query(`CALL ${procedure}`, (err, rows, fields) => {
     if (err) return next(err);
-    cb(rows)
+    return cb(rows)
   });
 }
 
