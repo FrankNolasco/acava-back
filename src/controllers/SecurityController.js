@@ -31,8 +31,7 @@ const verificarModulo = (req, res, next) => {
         const { idModulo } = req.body
         if (headers) {
             callProcedureCallback(`consultarModuloPorRol('${idModulo}','${headers.rol}')` , (rows) => {
-                console.log("validar rows2",validarRows(rows))
-                if(validarRows(rows)) next()
+                if(validarRows(rows)) return next()
                 else throw new Error()
             })
         }
@@ -40,7 +39,6 @@ const verificarModulo = (req, res, next) => {
     } catch (error) {
         res.sendStatus(502)
     }
-    
 }
 
 const verificarPermiso = (req, res, next) => {
