@@ -54,7 +54,7 @@ app.get('/page-data/app/Perfil/page-data.json' , (req,res,next) => {
 
 app.get('/app/:directory/:filename',(req,res,next) => {
   const { directory , filename } = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${filename}`))
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${filename}/index.html`))
 })
 
 app.get('/app/:directory/:directory2/:filename',(req,res,next) => {
