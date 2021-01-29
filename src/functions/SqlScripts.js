@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
   database: "acabados",
 });
 
-function callProcedure(procedure, res,next) {
+const callProcedure = (procedure, res,next) => {
   if (!connection._connectCalled) {
     connection.connect();
   }
