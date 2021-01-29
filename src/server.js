@@ -29,53 +29,83 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET", "POST","HEAD");
   next();
 });
-
+// INICIO
 app.get('/',(req,res,next) => {
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/index.html`))
 })
-
+//ERROR 404
+app.get('/404',(req,res,next) => {
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/404.html`))
+})
+// ARCHIVOS EN LA RAIZ
 app.get('/:filename',(req,res,next) => {
   const {filename} = req.params
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${filename}`))
 })
-
-app.get('/:directory/:filename',(req,res,next) => {
-  const { directory , filename } = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${directory}/${filename}`))
-})
-
-app.head("/app/Perfil",(req,res,next) => {
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/Perfil/index.html`))
-})
-
-app.get('/page-data/app/Perfil/page-data.json' , (req,res,next) => {
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/app/Perfil/page-data.json`))
-})
-
-app.get('/app/:directory/:filename',(req,res,next) => {
-  const { directory , filename } = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${filename}/index.html`))
-})
-
-app.get('/app/:directory/:directory2/:filename',(req,res,next) => {
-  const { directory , directory2 , filename } = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${directory2}/${filename}`))
-})
-
+//DIRECTORIO STATIC
 app.get('/static/:filename',(req,res,next) => {
   const {filename} = req.params
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/static/${filename}`))
 })
-
+//PAGE DATA
 app.get('/page-data/:filename',(req,res,next) => {
   const {filename} = req.params
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${filename}`))
 })
-
 app.get('/page-data/:directory/:filename',(req,res,next) => {
   const { filename , directory } = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${directory}/page-data.json`))
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${directory}/${filename}`))
 })
+
+app.get('/page-data/app/:directory/:filename' , (req,res,next) => {
+  const { filename , directory } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/app/${directory}/${filename}`))
+})
+app.get('/page-data/app/:directory/:directory2/:filename' , (req,res,next) => {
+  const { filename , directory , directory2 } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/app/${directory}/${directory2}/${filename}`))
+})
+//FINALIZA LOS PAGE DATA
+
+//PAGINAS
+
+app.get('/:directory',(req,res,next) => {
+  const { directory } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${directory}/index.html`))
+})
+
+app.head('/:directory',(req,res,next) => {
+  const { directory } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${directory}/index.html`))
+})
+
+app.get('/app/:directory',(req,res,next) => {
+  const { directory } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/index.html`))
+})
+
+app.head('/app/:directory',(req,res,next) => {
+  const { directory } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/index.html`))
+})
+
+app.get('/app/:directory/:directory2',(req,res,next) => {
+  const { directory , directory2} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${directory2}/index.html`))
+})
+
+app.head('/app/:directory/:directory2',(req,res,next) => {
+  const { directory , directory2 } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${directory2}/index.html`))
+})
+
+app.head('/app/:directory/',(req,res,next) => {
+  const { directory } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${filename}/index.html`))
+})
+
+// FINALIZA PAGINAS
+
 
 app.get('/Login',(req,res,next) =>{
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/Login/index.html`))
