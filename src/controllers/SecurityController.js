@@ -21,7 +21,7 @@ const VerificarRol = ( req, res, next ) => {
             throw new Error()
         }
     } catch (error) {
-        res.sendStatus(502)
+        
     }
 }
 
@@ -37,7 +37,7 @@ const verificarModulo = (req, res, next) => {
         }
         else throw new Error()
     } catch (error) {
-        res.sendStatus(502)
+        
     }
 }
 
