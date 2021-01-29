@@ -72,9 +72,9 @@ app.get('/page-data/:filename',(req,res,next) => {
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${filename}`))
 })
 
-app.get('/page-data/:directory/:filename',(req,res,next) => {
-  const { filename , directory } = req.params
-  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${directory}/${filename}`))
+app.get('/page-data/:directory/',(req,res,next) => {
+  const { directory } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${directory}/page-data.json`))
 })
 
 app.get('/Login',(req,res,next) =>{
