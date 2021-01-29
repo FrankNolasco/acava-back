@@ -18,7 +18,7 @@ const callProcedure = (procedure, res,next) => {
   });
 }
 
-function callProcedureCallback(procedure, cb ) {
+const callProcedureCallback = (procedure, cb , next) => {
   if (!connection._connectCalled) {
     connection.connect();
   }

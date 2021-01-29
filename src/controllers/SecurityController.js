@@ -16,7 +16,7 @@ const VerificarRol = ( req, res, next ) => {
                 }else{
                     throw new Error()
                 }
-            })
+            },next)
         }else{
             throw new Error()
         }
@@ -33,7 +33,7 @@ const verificarModulo = (req, res, next) => {
             callProcedureCallback(`consultarModuloPorRol('${idModulo}','${headers.rol}')` , (rows) => {
                 if(validarRows(rows)) return next()
                 else throw new Error()
-            })
+            },next)
         }
         else throw new Error()
     } catch (error) {

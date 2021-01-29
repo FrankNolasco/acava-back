@@ -1,4 +1,4 @@
-const { callProcedure , connection } = require("../functions/SqlScripts");
+const { callProcedure , connection, callProcedureCallback } = require("../functions/SqlScripts");
 const bcrypt = require("bcrypt-nodejs");
 const { validarRows } = require("../functions/utils");
 
@@ -32,11 +32,7 @@ const asignarRolUsuarioWeb = (req,res,next) => {
 
 const consultarMenu = (req,res,next) => {
   const {Id_Rol} = req.body 
-  if (!connection._connectCalled) {
-    connection.connect();
-  }
-  connection.query(`CALL listarMenus('${Id_Rol}')`, (err, rows, fields) => {
-    if (err) next(err);
+  callProcedureCallback(`listarMenus('${Id_Rol}')`,(rows) => {
     if(validarRows(rows)){
       const menus = rows[0]
       const aux = []
@@ -55,7 +51,7 @@ const consultarMenu = (req,res,next) => {
     }else{
       res.sendStatus(500)
     }
-  });
+  },next)
 }
 
 module.exports = {
