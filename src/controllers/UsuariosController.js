@@ -47,6 +47,7 @@ const consultarMenu = (req,res,next) => {
         const subMenus = Array.isArray(menus) && menus.filter(menu => menu.Id_Menu === el.Id_Menu)
         return { ...el , subMenus }
       })
+      console.log(menuRespuesta)
       res.send([menuRespuesta]);
     }else{
       res.sendStatus(500)
