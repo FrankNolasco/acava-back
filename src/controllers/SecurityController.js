@@ -15,7 +15,7 @@ const VerificarRol = ( req, res, next ) => {
         })
     }
     console.log("mira como me ejecuto crack")
-    res.sendStatus(500)
+    res.sendStatus(404)
 }
 
 const verificarModulo = (req, res, next) => {
