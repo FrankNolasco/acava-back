@@ -1,42 +1,42 @@
-const { connection, callProcedureCallback } = require("../functions/SqlScripts");
+const { callProcedureCallback } = require("../functions/SqlScripts");
 const jwt = require("jsonwebtoken");
 const { validarRows , encontrarCabeceras } = require("../functions/utils");
 
 const VerificarRol = ( req, res, next ) => {
+    let centinela = false
     const headers = encontrarCabeceras(req)
     if(headers){
         callProcedureCallback(`consultarClaveSuperSecretaRol('${headers.rol}')`,(rows) => {
             if(validarRows(rows)){
                 const supersecret = rows[0][0].ClaveSupersecreta
                 jwt.verify(headers.token, supersecret , function (err) {
-                    if (err) {
-                        return next(err);
-                    }else{
-                        return next();
-                    }
+                    if (!err) centinela = true;
                 });
-            }else{
-                return next(new Error())
             }
         })
+    }
+    console.log(centinela)
+    if(centinela){
+        return next()
     }else{
-        return next(new Error())
+        res.sendStatus(500)
     }
 }
 
 const verificarModulo = (req, res, next) => {
+    let centinela = false
     const headers = encontrarCabeceras(req);
     const { idModulo } = req.body
     if (headers) {
         callProcedureCallback(`consultarModuloPorRol('${idModulo}','${headers.rol}')` , (rows) => {
-            if(validarRows(rows)) return next()
-            else{
-                return next(new Error())
-            }
+            if(validarRows(rows)) centinela = true
         })
     }
-    else{
-        return next(new Error())
+    console.log(centinela)
+    if(centinela){
+        return next()
+    }else{
+        res.sendStatus(500)
     }
 }
 

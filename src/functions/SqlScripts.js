@@ -13,8 +13,8 @@ function callProcedure(procedure, res,next) {
     connection.connect();
   }
   connection.query(`CALL ${procedure}`, (err, rows, fields) => {
-    if (err) next(err);
-    res.send(rows);
+    if (err) return next(err);
+    return res.send(rows);
   });
 }
 
