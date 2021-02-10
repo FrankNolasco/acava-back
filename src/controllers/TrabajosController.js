@@ -53,6 +53,11 @@ const editarTrabajo = async (req, res, next) => {
   }
 };
 
+const consultarTrabajoPorServicio = (req , res, next) => {
+  const { idServicio } = req.body;
+  callProcedure(`consultarTrabajosPorServicio('${idServicio}')`, res, next)
+}
+
 const eliminarTrabajo = (req, res, next) => {
   const { idTrabajo } = req.body;
   callProcedure(`eliminarTrabajo(${idTrabajo})`, res, next);
@@ -78,5 +83,6 @@ module.exports = {
   eliminarTrabajo,
   restaurarTrabajo,
   listarPapeleraTrabajos,
-  eliminarPermanentementeTrabajo
+  eliminarPermanentementeTrabajo,
+  consultarTrabajoPorServicio
 };
