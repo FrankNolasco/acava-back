@@ -9,7 +9,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const { localSignin } = require("./controllers/localStrategyController");
 const { login } = require("./controllers/userController");
 const app = express();
-const port = 80;
+const port = 5000;
 app.use(cors());
 app.use(
   bodyParser.urlencoded({
