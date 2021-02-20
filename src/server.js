@@ -3,12 +3,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const multer  = require("multer")
+const https = require('https')
 const path = require('path')
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const { localSignin } = require("./controllers/localStrategyController");
 const { login } = require("./controllers/userController");
 const app = express();
+const SSL = require('./security/SSL')
 const port = 5000;
 app.use(cors());
 app.use(
@@ -152,4 +154,6 @@ app.post('/api/upload/images', async (req,res,next) => {
   res.send([{imageUploaded : req.file.filename }])
 })
 
-app.listen(port, () => console.log(`Example app listening on port port!`));
+const httpsServer = https.createServer(SSL,app)
+
+httpsServer.listen(port, "acavadosserviciosgenerales.com",()=>{console.log("inicializado un server")});
