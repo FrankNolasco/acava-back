@@ -3,14 +3,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const multer  = require("multer")
-const https = require('https')
+//const https = require('https')
 const path = require('path')
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const { localSignin } = require("./controllers/localStrategyController");
 const { login } = require("./controllers/userController");
 const app = express();
-const SSL = require('./security/SSL')
+//const SSL = require('./security/SSL')
 const port = 5000;
 app.use(cors());
 app.use(
@@ -19,7 +19,12 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-
+//app.use((req,res,next)=> {
+//	if(req.protocol === 'http'){
+//		res.redirect(301,`https://${req.headers.host}${req.url}`);
+//	}
+//	next()
+//})
 app.use(morgan("dev"));
 app.use(function (req, res, next) {
   //acceso a conexiones que requieran a esta conexion
@@ -154,6 +159,10 @@ app.post('/api/upload/images', async (req,res,next) => {
   res.send([{imageUploaded : req.file.filename }])
 })
 
-const httpsServer = https.createServer(SSL,app)
+app.listen(port,()=>{
+	console.log("Servidor en el puerto 5000")
+})
 
-httpsServer.listen(port, "acavadosserviciosgenerales.com",()=>{console.log("inicializado un server")});
+//const httpsServer = https.createServer(SSL,app)
+
+//httpsServer.listen(port, "acavadosserviciosgenerales.com",()=>{console.log("inicializado un server")});

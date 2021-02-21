@@ -1,0 +1,14 @@
+const fs = require('fs'const ca = fs.readFileSync('./www_acavadosserviciosgenerales_com.ca-bundle')
+console.log(ca)
+const crt = fs.readFileSync('./www_acavadosserviciosgenerales_com.crt')
+console.log(crt)
+const key = fs.readFileSync('./acavadosserviciosgenerales_com.key')
+console.log(key)
+
+const SSL = {
+    crt,
+    ca,
+	key
+}
+
+module.exports = SSL
