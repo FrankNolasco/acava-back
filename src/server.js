@@ -95,7 +95,15 @@ app.head('/app/:directory',(req,res,next) => {
   const { directory } = req.params
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/index.html`))
 })
+app.get('/:directory/:directory2',(req,res,next) => {
+  const { directory , directory2} = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${directory}/${directory2}/index.html`))
+})
 
+app.head('/:directory/:directory2',(req,res,next) => {
+  const { directory , directory2 } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/${directory}/${directory2}/index.html`))
+})
 app.get('/app/:directory/:directory2',(req,res,next) => {
   const { directory , directory2} = req.params
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/app/${directory}/${directory2}/index.html`))

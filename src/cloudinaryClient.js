@@ -12,7 +12,6 @@ const subirImagenCloudinary = async(image_name) => {
   try {
     return await cloudinaryClient.v2.uploader.upload(path.join(__dirname,`/public/uploads/${image_name}`));
   } catch (error) {
-    console.log(error)
     return null  
   }
 }

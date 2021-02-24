@@ -1,6 +1,8 @@
-const { callProcedure } = require("../functions/SqlScripts");
+const {
+  callProcedure,
+  callProcedureForPromise,
+} = require("../functions/SqlScripts");
 const { subirImagenCloudinary } = require("../cloudinaryClient");
-
 const listarTrabajos = (req, res, next) => {
   callProcedure(`listarTrabajos()`, res, next);
 };
@@ -33,7 +35,7 @@ const editarTrabajo = async (req, res, next) => {
     image_modified,
     imagenUploaded,
   } = req.body;
-  if(image_modified){
+  if (image_modified) {
     const result = await subirImagenCloudinary(imagenUploaded);
     if (result) {
       callProcedure(
@@ -44,7 +46,7 @@ const editarTrabajo = async (req, res, next) => {
     } else {
       res.sendStatus(400);
     }
-  }else{
+  } else {
     callProcedure(
       `editarTrabajo(${Id_Trabajo},'${Nombre_trabajo}','${Id_Servicio}','${Imagen_source}','${Descripcion}')`,
       res,
@@ -52,29 +54,61 @@ const editarTrabajo = async (req, res, next) => {
     );
   }
 };
-
-const consultarTrabajoPorServicio = (req , res, next) => {
+const consultarTrabajoPorServicio = (req, res, next) => {
   const { idServicio } = req.body;
-  callProcedure(`consultarTrabajosPorServicio('${idServicio}')`, res, next)
-}
-
+  callProcedure(`consultarTrabajosPorServicio('${idServicio}')`, res, next);
+};
 const eliminarTrabajo = (req, res, next) => {
   const { idTrabajo } = req.body;
   callProcedure(`eliminarTrabajo(${idTrabajo})`, res, next);
 };
-
-const listarPapeleraTrabajos = (req,res,next) => {
-  callProcedure('listarPapeleraTrabajos()',res,next)
-}
-const restaurarTrabajo = (req,res,next) => {
+const listarPapeleraTrabajos = (req, res, next) => {
+  callProcedure("listarPapeleraTrabajos()", res, next);
+};
+const restaurarTrabajo = (req, res, next) => {
   const { idTrabajo } = req.body;
-  callProcedure(`restaurarTrabajo('${idTrabajo}')`, res, next)
-}
-const eliminarPermanentementeTrabajo = (req,res,next) => {
+  callProcedure(`restaurarTrabajo('${idTrabajo}')`, res, next);
+};
+const eliminarPermanentementeTrabajo = (req, res, next) => {
   const { idTrabajo } = req.body;
-  callProcedure(`eliminarPermanentementeTrabajo('${idTrabajo}')`, res, next)
-}
+  callProcedure(`eliminarPermanentementeTrabajo('${idTrabajo}')`, res, next);
+};
+const consultarGaleriaTrabajo = (req, res, next) => {
+  const { idTrabajo } = req.body;
+  callProcedure(`consultarGaleriaTrabajo('${idTrabajo}')`, res, next);
+};
 
+const InsertarImagen = (idTrabajo, imagen,idx) =>
+      new Promise(async (resolve, reject) => {
+        const result = await subirImagenCloudinary(imagen);
+        callProcedureForPromise(
+          `insertarImagenGaleriaTrabajo('${idTrabajo}','${imagen}','${result.secure_url}')`,
+          resolve,
+          reject,
+          idx
+        );
+      });
+const insertarImagenGaleriaTrabajo = (req, res, next) => {
+  const { idTrabajo, arrayImages } = req.body;
+  if (Array.isArray(arrayImages)) {
+    return arrayImages.forEach(async(imageName,idx)=>{
+      if((await InsertarImagen(idTrabajo, imageName,idx).then((x) => x)).valueOf() === arrayImages.length - 1){
+        return res.sendStatus(200)
+      }
+    })
+  } else {
+    res.sendStatus(500);
+  }
+};
+const eliminarImagenDeGaleriaTrabajo = (req, res, next) => {
+  const { idGaleriaTrabajo } = req.body;
+  console.log(idGaleriaTrabajo);
+  callProcedure(
+    `eliminarImagenDeGaleriaTrabajo('${idGaleriaTrabajo}')`,
+    res,
+    next
+  );
+};
 module.exports = {
   listarTrabajos,
   consultarTrabajo,
@@ -84,5 +118,8 @@ module.exports = {
   restaurarTrabajo,
   listarPapeleraTrabajos,
   eliminarPermanentementeTrabajo,
-  consultarTrabajoPorServicio
+  consultarTrabajoPorServicio,
+  consultarGaleriaTrabajo,
+  insertarImagenGaleriaTrabajo,
+  eliminarImagenDeGaleriaTrabajo,
 };

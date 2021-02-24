@@ -1,10 +1,10 @@
 var mysql = require("mysql");
 var connection = mysql.createConnection({
   host: "localhost",
-  // user: "root",
-  user: "frank",
-  // password: "Frank09por123*",
-  password: "Frank09p0r123*",
+  user: "root",
+  // user: "frank",
+  password: "Frank09por123*",
+  // password: "Frank09p0r123*",
   database: "acabados",
 });
 
@@ -28,10 +28,25 @@ const callProcedureCallback = (procedure, cb , next) => {
   });
 }
 
+const callProcedureForPromise = (procedure,resolve,reject,idx) => {
+  if (!connection._connectCalled) {
+    connection.connect();
+  }
+  connection.query(`CALL ${procedure}`, (err, rows, fields) => {
+    if (err) {
+      return resolve(idx)
+    }else{
+      return resolve(idx,null)
+    }
+  });
+}
+
+
 
 const Scripts = {
   callProcedure,
   callProcedureCallback,
+  callProcedureForPromise,
   connection,
 };
 

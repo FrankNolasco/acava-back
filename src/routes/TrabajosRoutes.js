@@ -9,7 +9,10 @@ const {
   restaurarTrabajo,
   listarPapeleraTrabajos,
   eliminarPermanentementeTrabajo,
-  consultarTrabajoPorServicio
+  consultarTrabajoPorServicio,
+  consultarGaleriaTrabajo,
+  insertarImagenGaleriaTrabajo,
+  eliminarImagenDeGaleriaTrabajo
 } = require("../controllers/TrabajosController");
 const routes = Router();
 routes.get("/listar", listarTrabajos);
@@ -21,4 +24,7 @@ routes.post("/eliminar", VerificarRol , eliminarTrabajo);
 routes.post("/restaurar", VerificarRol , restaurarTrabajo);
 routes.post("/perma-eliminar",VerificarRol,eliminarPermanentementeTrabajo)
 routes.post("/servicio/listar", consultarTrabajoPorServicio)
+routes.post("/galeria/consultar", consultarGaleriaTrabajo)
+routes.post("/galeria/imagen/insertar",VerificarRol,insertarImagenGaleriaTrabajo)
+routes.post("/galeria/imagen/eliminar",VerificarRol,eliminarImagenDeGaleriaTrabajo)
 module.exports = routes;
