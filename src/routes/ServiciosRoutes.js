@@ -8,7 +8,9 @@ const {
   eliminarServicio,
   listarPapeleraServicios,
   restaurarServicio,
-  eliminarPermanentementeServicio
+  eliminarPermanentementeServicio,
+  solicitarServicio,
+  listarSolicitudesServicio
 } = require("../controllers/ServiciosController");
 const routes = Router();
 routes.get("/listar", listarServicios);
@@ -19,4 +21,6 @@ routes.post("/editar", VerificarRol , editarServicio);
 routes.post("/eliminar", VerificarRol , eliminarServicio);
 routes.post("/restaurar", VerificarRol , restaurarServicio);
 routes.post("/perma-eliminar",VerificarRol,eliminarPermanentementeServicio)
+routes.get("/solicitudes/listar",VerificarRol,listarSolicitudesServicio)
+routes.post("/solicitar",solicitarServicio)
 module.exports = routes;

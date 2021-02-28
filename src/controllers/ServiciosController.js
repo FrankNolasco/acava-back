@@ -8,17 +8,17 @@ const consultarServicio = (req, res, next) => {
   const { idServicio } = req.params;
   callProcedure(`consultarServicio(${idServicio})`, res, next);
 };
-const listarPapeleraServicios = (req,res,next) => {
-  callProcedure('listarPapeleraServicios()',res,next)
-}
-const restaurarServicio = (req,res,next) => {
+const listarPapeleraServicios = (req, res, next) => {
+  callProcedure("listarPapeleraServicios()", res, next);
+};
+const restaurarServicio = (req, res, next) => {
   const { idServicio } = req.body;
-  callProcedure(`restaurarServicio('${idServicio}')`, res, next)
-}
-const eliminarPermanentementeServicio = (req,res,next) => {
+  callProcedure(`restaurarServicio('${idServicio}')`, res, next);
+};
+const eliminarPermanentementeServicio = (req, res, next) => {
   const { idServicio } = req.body;
-  callProcedure(`eliminarPermanentementeServicio('${idServicio}')`, res, next)
-}
+  callProcedure(`eliminarPermanentementeServicio('${idServicio}')`, res, next);
+};
 const crearServicio = async (req, res, next) => {
   const {
     Id_Tipo_Servicio,
@@ -51,7 +51,7 @@ const editarServicio = async (req, res, next) => {
     Id_Tipo_Servicio,
     Precio_referencial,
   } = req.body;
-  if(image_modified){
+  if (image_modified) {
     const result = await subirImagenCloudinary(imagenUploaded);
     if (result) {
       callProcedure(
@@ -62,7 +62,7 @@ const editarServicio = async (req, res, next) => {
     } else {
       res.sendStatus(400);
     }
-  }else{
+  } else {
     callProcedure(
       `editarServicio(${Id_Servicio},'${Nombre_Servicio}','${Descripcion}','${Imagen_source}','${Id_Tipo_Servicio}','${Precio_referencial}')`,
       res,
@@ -76,6 +76,21 @@ const eliminarServicio = (req, res, next) => {
   callProcedure(`eliminarServicio(${idServicio})`, res, next);
 };
 
+const solicitarServicio = (req, res, next) => {
+  const { nombre, correo, telefono, Id_Servicio, id_trabajo } = req.body;
+  callProcedure(
+    `crearSolicitudServicio('${nombre}','${correo}','${telefono}','${Id_Servicio}','${
+      id_trabajo ? id_trabajo : "NULL"
+    }')`,
+    res,
+    next
+  );
+};
+
+const listarSolicitudesServicio = (req, res, next) => {
+  callProcedure(`listarSolicitudesServicio()`,res,next)
+}
+
 module.exports = {
   listarServicios,
   consultarServicio,
@@ -84,5 +99,7 @@ module.exports = {
   eliminarServicio,
   listarPapeleraServicios,
   restaurarServicio,
-  eliminarPermanentementeServicio
+  eliminarPermanentementeServicio,
+  solicitarServicio,
+  listarSolicitudesServicio
 };
