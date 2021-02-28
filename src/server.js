@@ -63,6 +63,10 @@ app.get('/page-data/:directory/:filename',(req,res,next) => {
   const { filename , directory } = req.params
   res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${directory}/${filename}`))
 })
+app.get('/page-data/:directory/:directory2/:filename',(req,res,next) => {
+  const { filename , directory , directory2 } = req.params
+  res.sendFile(path.join(__dirname,`/frontend/Gatsby/Acavados/page-data/${directory}/${directory2}/${filename}`))
+})
 
 app.get('/page-data/app/:directory/:filename' , (req,res,next) => {
   const { filename , directory } = req.params
