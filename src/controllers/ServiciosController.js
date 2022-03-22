@@ -1,4 +1,4 @@
-const { subirImagenCloudinary } = require("../cloudinaryClient");
+// const { subirImagenCloudinary } = require("../cloudinaryClient");
 const { callProcedure } = require("../functions/SqlScripts");
 
 const listarServicios = (req, res, next) => {
@@ -28,17 +28,21 @@ const crearServicio = async (req, res, next) => {
     Imagen_referencial,
     id_usuario_registro,
   } = req.body;
-  const result = await subirImagenCloudinary(Imagen_referencial);
-  if (result) {
-    callProcedure(
-      `crearServicio( '${Descripcion}', ${Id_Tipo_Servicio} , '${Nombre_Servicio}' ,  
-      '${Precio_referencial}' , '${result.secure_url}' , '${id_usuario_registro}' )`,
-      res,
-      next
-    );
-  } else {
-    res.sendStatus(400);
-  }
+  // const result = await subirImagenCloudinary(Imagen_referencial);
+  // if (result) {
+    try {
+      callProcedure(
+        `crearServicio( '${Descripcion}', ${Id_Tipo_Servicio} , '${Nombre_Servicio}' ,  
+        '${Precio_referencial}' , 'https://google.com/images/imagen.png' , '${id_usuario_registro}' )`,
+        res,
+        next
+      );
+    } catch (error) {
+      res.sendStatus(400)
+    }
+  // } else {
+  //   res.sendStatus(400);
+  // }
 };
 const editarServicio = async (req, res, next) => {
   const {
@@ -51,24 +55,28 @@ const editarServicio = async (req, res, next) => {
     Id_Tipo_Servicio,
     Precio_referencial,
   } = req.body;
-  if (image_modified) {
-    const result = await subirImagenCloudinary(imagenUploaded);
-    if (result) {
-      callProcedure(
-        `editarServicio(${Id_Servicio},'${Nombre_Servicio}','${Descripcion}','${result.secure_url}','${Id_Tipo_Servicio}','${Precio_referencial}')`,
-        res,
-        next
-      );
-    } else {
-      res.sendStatus(400);
-    }
-  } else {
+  // if (image_modified) {
+  //   const result = await subirImagenCloudinary(imagenUploaded);
+    // if (result) {
+  try {
     callProcedure(
-      `editarServicio(${Id_Servicio},'${Nombre_Servicio}','${Descripcion}','${Imagen_source}','${Id_Tipo_Servicio}','${Precio_referencial}')`,
+      `editarServicio(${Id_Servicio},'${Nombre_Servicio}','${Descripcion}','https://google.com/images/image.png','${Id_Tipo_Servicio}','${Precio_referencial}')`,
       res,
       next
     );
+  } catch (error) {
+    res.sendStatus(400)
   }
+    // } else {
+    //   res.sendStatus(400);
+    // }
+  // } else {
+  //   callProcedure(
+  //     `editarServicio(${Id_Servicio},'${Nombre_Servicio}','${Descripcion}','${Imagen_source}','${Id_Tipo_Servicio}','${Precio_referencial}')`,
+  //     res,
+  //     next
+  //   );
+  // }
 };
 
 const eliminarServicio = (req, res, next) => {
